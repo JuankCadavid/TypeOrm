@@ -6,13 +6,15 @@ import { ProductsRepository } from "../repositories/product.repository";
 
 class productsController {
 
+    // CustomRepository
     public async getProducts(req: Request, res: Response): Promise<Response> {
 
-        const products = await getRepository(Products).find();
+        const products = await getCustomRepository(ProductsRepository).find();
         return res.json(products);
 
     }
 
+    // Standar Repository 
     public async getProduct(req: Request, res: Response): Promise<Response> {
 
         const id = req.params.id;
@@ -22,12 +24,12 @@ class productsController {
 
     }
 
+    // CustomRepository
     public async getProductName(req: Request, res: Response): Promise<Response> {
 
-       const productsRepository=getCustomRepository(ProductsRepository)
         const name = req.params.name;
 
-        const product = await productsRepository.findByName(name);
+        const product = await getCustomRepository(ProductsRepository).findByName(name);
         return res.json(product);
 
     }
